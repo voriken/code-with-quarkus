@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C c:/lama/code-with-quarkus config --list --show-origin)",
+      "Bash(git -C c:/lama/code-with-quarkus remote -v)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)"
+    ]
+  }
+}
