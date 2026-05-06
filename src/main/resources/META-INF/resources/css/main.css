@@ -1,6 +1,10 @@
 /* ── 기본 레이아웃 ──────────────────────────────────────────── */
 body { background-color: #0a0e17; color: #fff; font-family: 'Arial', sans-serif; }
 .navbar { background-color: #000; }
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .dropdown-toggle { color: #fff; }
+.navbar .navbar-toggler-icon { filter: invert(1); }
 .hero { background: linear-gradient(to bottom, #1e1e1e, #0a0e17); min-height: 60vh; }
 
 /* ── 강조 색상 ──────────────────────────────────────────────── */
@@ -69,3 +73,34 @@ body { background-color: #0a0e17; color: #fff; font-family: 'Arial', sans-serif;
 
 .no-result { text-align: center; padding: 80px 20px; color: #666; }
 .no-result h4 { color: #333; }
+
+/* ── [추가] 테마 토글 버튼 (폰트 크기, 색상 등) ───────────────── */
+#themeToggleBtn { font-size: 1.1rem; color: #fff; }
+body.light-mode #themeToggleBtn { color: #212529; }
+
+/* ── [추가] 라이트 모드 (다양한 색상 정보) ──────────────────── */
+body.light-mode { background-color: #f8f9fa; color: #212529; }
+body.light-mode .navbar { background-color: #e9ecef; }
+body.light-mode .navbar .navbar-brand,
+body.light-mode .navbar .nav-link,
+body.light-mode .navbar .dropdown-toggle { color: #212529; }
+body.light-mode .navbar .navbar-toggler-icon { filter: none; }
+body.light-mode .hero { background: linear-gradient(to bottom, #dce3ea, #f8f9fa); color: #212529; }
+body.light-mode .card,
+body.light-mode .card.bg-dark { background-color: #ffffff !important; color: #212529 !important; border: 1px solid #dee2e6 !important; }
+body.light-mode .card.text-white,
+body.light-mode .card.text-white * { color: #212529 !important; }
+body.light-mode .card-title { color: #212529; }
+body.light-mode .card-text { color: #555; }
+
+/* 라이트 모드: 어두운 배경 전용 버튼/모달 보정 */
+body.light-mode .btn-outline-light { color: #212529; border-color: #212529; }
+body.light-mode .btn-outline-light:hover { background-color: #212529; color: #fff; }
+body.light-mode .modal-content.bg-dark { background-color: #ffffff !important; color: #212529 !important; border-color: #dee2e6 !important; }
+body.light-mode .modal-content .modal-header,
+body.light-mode .modal-content .modal-footer { border-color: #dee2e6 !important; }
+body.light-mode .btn-close-white { filter: none; }
+
+/* 라이트 모드: 검색 결과 영역 가독성 */
+body.light-mode .search-keyword-header { background: #e9ecef; background-image: none; border-bottom: 2px solid #c8a96e; }
+body.light-mode .search-keyword-header h1 { color: #212529; }

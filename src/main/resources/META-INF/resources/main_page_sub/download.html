@@ -12,6 +12,7 @@
     <!-- 부트스트랩 JS 번들 로드 -->
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/test.js"></script>
+    <script src="/js/toggle.js" defer></script>
     <style>
         /* 기본 바디 스타일 */
         body {
@@ -25,6 +26,24 @@
         .navbar {
             background-color: #000;
         }
+        .navbar .navbar-brand,
+        .navbar .nav-link,
+        .navbar .dropdown-toggle { color: #fff; }
+        .navbar .navbar-toggler-icon { filter: invert(1); }
+
+        /* [추가] 테마 토글 버튼 */
+        #themeToggleBtn { font-size: 1.1rem; color: #fff; }
+        body.light-mode #themeToggleBtn { color: #212529; }
+
+        /* [추가] 라이트 모드 */
+        body.light-mode { background-color: #f8f9fa; color: #212529; }
+        body.light-mode .navbar { background-color: #e9ecef; }
+        body.light-mode .navbar .navbar-brand,
+        body.light-mode .navbar .nav-link,
+        body.light-mode .navbar .dropdown-toggle { color: #212529; }
+        body.light-mode .navbar .navbar-toggler-icon { filter: none; }
+        body.light-mode .card { background-color: #ffffff; color: #212529; border: 1px solid #dee2e6; }
+        body.light-mode .download-meta { color: #888; }
 
         /* 강조 색상(보라) */
         .accent-purple {
@@ -172,10 +191,12 @@
 <body>
 
     <!-- 상단 네비게이션 바 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <!-- 브랜드 로고/텍스트 -->
             <a class="navbar-brand" href="#">리그오브레전드</a>
+            <!-- [추가] 다크/라이트 토글 버튼 -->
+            <button class="btn border-0" id="themeToggleBtn" onclick="toggleTheme()">🌙 DARK</button>
             <!-- 모바일 토글 버튼 -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
