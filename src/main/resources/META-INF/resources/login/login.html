@@ -58,19 +58,32 @@
         <div class="container" style="max-width: 400px;">
             <h2 class="fw-bold mb-4">로그인</h2>
 
-            <form method="POST" action="/login_check">
+            <form id="loginForm" method="POST" action="/login_check">
                 <div class="mb-3 text-start">
                     <label class="form-label">아이디</label>
                     <input type="text" class="form-control"
-                           name="username" placeholder="아이디 입력" required>
+                           id="usernameInput" name="username"
+                           placeholder="아이디 입력" required>
+                    <div class="invalid-feedback" id="usernameInputMsg"></div>
                 </div>
                 <div class="mb-3 text-start">
                     <label class="form-label">패스워드</label>
                     <input type="password" class="form-control"
-                           name="password" placeholder="패스워드 입력" required>
+                           id="passwordInput"
+                           placeholder="패스워드 입력" required>
+                    <div class="invalid-feedback" id="passwordInputMsg"></div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">로그인</button>
+
+                <!-- 서버 전송용 해시 패스워드 (화면에 보이지 않음) -->
+                <input type="hidden" id="hashedLoginPassword" name="password">
+
+                <button type="button" class="btn btn-primary w-100"
+                        onclick="validateAndLogin()">로그인</button>
             </form>
+
+            <!-- [12주차] 로그인 버튼 아래 회원가입 버튼 추가 -->
+            <hr>
+            <a href="/register" class="btn btn-outline-secondary w-100">회원가입</a>
 
             <script>
                 const params = new URLSearchParams(window.location.search);
@@ -81,6 +94,7 @@
         </div>
     </section>
 
+    <script src="/js/login.js"></script>
 </body>
 
 </html>

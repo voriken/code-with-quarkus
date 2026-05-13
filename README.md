@@ -35,6 +35,21 @@
 - Vert.x `SessionHandler` + `LocalSessionStore` (1시간 timeout, HttpOnly 쿠키)
 - 추가 과제: 로그인/회원 페이지에도 다크/라이트 토글 & 동일 네비바 적용
 
+### 12주차 — 회원가입 & 암호화
+- `User` 엔티티에 `email`(@Column unique) + `phone` 컬럼 추가, `findByEmail()` 추가
+- 회원가입 엔드포인트 3종 (`AuthResource`):
+  - `GET /register` → register.html 반환
+  - `POST /register_check` → 아이디/이메일 중복 체크 + DB 삽입 + `/register_success` 리다이렉트
+  - `GET /register_success` → register_success.html 반환
+- `register.html`: 아이디/패스워드/패스워드 확인/이메일/연락처 폼 + 가입 확인 모달
+- `input_check.js`: 정규식 기반 입력 유효성 검사
+  - 아이디 `^[a-zA-Z0-9]{4,20}$`, 패스워드 `(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}`, 이메일, 연락처 `^010-\d{4}-\d{4}$`
+  - URL 파라미터 `error=duplicate_username|duplicate_email`로 서버 에러 표시
+- `input_sha256.js`: 브라우저 Web Crypto API (`crypto.subtle.digest('SHA-256', …)`)로 패스워드 해시 후 hidden 필드 전송 → DB에는 해시값만 저장
+- `login.html`: 로그인 버튼 아래 회원가입 버튼(`btn-outline-secondary`) 추가
+- 과제 — 로그인 화면도 동일하게 입력 검증 + SHA-256 해시(`login.js` + `validateAndLogin()` + `submitLogin()`)
+- DataSeeder가 guest 비밀번호도 SHA-256 해시로 저장하도록 변경, 평문 잔존 시 1회 마이그레이션
+
 ## 실행 방법
 
 1. MySQL 8.x 설치 후 root 계정 비밀번호를 `123123`으로 설정
@@ -63,8 +78,11 @@ src/main/
         ├── css/main.css           # 공통 스타일 + 라이트 모드
         ├── js/
         │   ├── test.js            # 검색 기능
-        │   └── toggle.js          # 다크/라이트 모드 토글
-        ├── login/                 # 로그인 / 로그인 완료 페이지
+        │   ├── toggle.js          # 다크/라이트 모드 토글
+        │   ├── input_check.js     # 회원가입 입력 유효성 검사 (정규식)
+        │   ├── input_sha256.js    # 회원가입 SHA-256 해시 + 확인 모달
+        │   └── login.js           # 로그인 입력 검증 + SHA-256 해시
+        ├── login/                 # 로그인 / 회원가입 / 가입완료 페이지
         ├── main_page_sub/         # 다운로드 페이지
         └── modals/                # 챔피언 상세 모달
 ```
